@@ -1,0 +1,32 @@
+FROM mambaorg/micromamba:1.5-lunar
+LABEL maintainer "litao <litao1503@outlook.com>"
+
+USER root
+WORKDIR /opt
+SHELL ["/bin/bash", "-c"]
+
+ADD ./.mambarc /home/mambauser/.mambarc
+
+RUN mkdir /tools
+
+ADD ./binary_tools/SNPsplit-0.6.0 /tools/SNPsplit-0.6.0
+ADD ./binary_tools/trio_binning /tools/trio_binning
+
+### Virtual environment
+RUN set -e \
+    && micromamba create -n asecount -c conda-forge python=3.10 \
+    && eval "$(micromamba shell hook --shell bash)" \
+    && micromamba activate asecount \
+    && micromamba install -c bioconda -c conda-forge \
+    pandas numpy matplotlib seaborn \
+    kmc samtools seqtk conda-forge::gcc
+
+RUN set -e \
+    && eval "$(micromamba shell hook --shell bash)" \
+    && micromamba activate asecount \
+    && cd /tools/trio_binning \
+    && pip install .
+
+RUN micromamba update --all --prefix /opt/conda/envs/asecount && micromamba clean --all -y
+
+ENV PATH=/opt/conda/envs/asecount/bin/:$PATH
