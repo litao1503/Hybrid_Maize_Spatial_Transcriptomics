@@ -124,9 +124,7 @@ each sample.
 If you use the workflows or other materials in this repository, please cite the
 associated manuscript:
 
-> Li T, Jiang Y, Zhang M, Zhu K, Jiang S, Yang X, Liu H, Wang J, Dong X, Shi J.
-> **Spatial and single-nucleus transcriptomics reveal the complexity of genomic
-> imprinting in maize.** Manuscript under review.
+Li, T., Jiang, Y., Zhang, M. *et al.* Spatial and single-nucleus transcriptomics reveal the complexity of genomic imprinting in maize. *Genome Biol* (2026). [https://doi.org/10.1186/s13059-026-04291-9](https://doi.org/10.1186/s13059-026-04291-9)
 
 
 ## License
